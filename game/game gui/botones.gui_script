@@ -1,0 +1,57 @@
+local datos = require("main.datos")
+local botonera_x = datos.screen_size[1]/2;
+local botonera_y = datos.screen_size[2] - 80;
+-- Vars funciones
+local activar_boton;
+function init(self)
+	-- Nodos
+	self.botonera = gui.get_node("caja_botonera");
+	self.vacc = gui.get_node("vacuna"); 
+	self.pasti = gui.get_node("pasti");
+	self.curita = gui.get_node("curita");
+	self.comida = gui.get_node("comida");
+
+	-- Posicion botonera
+	gui.set_position(self.botonera, vmath.vector3(botonera_x,botonera_y,0));
+
+	-- Flags
+	self.boton_activo = false;
+
+	-- Input
+	msg.post("", "acquire_input_focus");
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	if gui.pick_node(self.vacc, action.x, action.y) and action.pressed then
+		activar_boton(self, self.vacc);
+	elseif gui.pick_node(self.pasti, action.x, action.y) and action.pressed then
+		activar_boton(self, self.pasti);
+	elseif gui.pick_node(self.curita, action.x, action.y) and action.pressed then
+		activar_boton(self, self.curita);
+	elseif gui.pick_node(self.comida, action.x, action.y) and action.pressed then
+		activar_boton(self, self.comida);
+	end
+end
+
+activar_boton = function(self, nombre_de_boton)
+	self.boton_activo = gui.get_id(nombre_de_boton);
+	print(self.boton_activo);
+end
