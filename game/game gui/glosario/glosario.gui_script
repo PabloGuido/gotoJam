@@ -3,17 +3,38 @@ local remedios = require("game.game gui.glosario.remedios")
 local glosario_x = datos.screen_size[1]/2 - 390;
 local glosario_y = datos.screen_size[2]/2;
 
+
 -- Vars nodos
 local glosario;
 local instrucciones;
+
+local primero;
+local segundo;
+local tercero;
+local cuarto;
+local primero_img;
+local segundo_img;
+local tercero_img;
+local cuarto_img;
 function init(self)
 	-- Nodos
 	glosario = gui.get_node("glosario");
 	gui.set_position(glosario, vmath.vector3(glosario_x,glosario_y,0))
-
+	
 	instrucciones = gui.get_node("instrucciones");
-	gui.set_position(instrucciones, vmath.vector3(datos.screen_size[1]/2,glosario_y - 240,0))
-
+	gui.set_position(instrucciones, vmath.vector3(datos.screen_size[1]/2,glosario_y - 240,0));
+	
+	primero = gui.get_node("primero");
+	segundo = gui.get_node("segundo");
+	tercero = gui.get_node("tercero");
+	cuarto = gui.get_node("cuarto");
+	primero_img = gui.get_node("primero_img");
+	segundo_img = gui.get_node("segundo_img");
+	tercero_img = gui.get_node("tercero_img");
+	cuarto_img = gui.get_node("cuarto_img");
+	
+	gui.play_flipbook(primero_img, "comida")
+	--gui.set_enabled(instrucciones, false);
 	pprint(remedios)
 end
 
