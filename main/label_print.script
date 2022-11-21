@@ -1,0 +1,5 @@
+function on_message(self, message_id, message, sender)
+	if message_id == hash("print") then
+		label.set_text("#label", message.msg .. "\n " .. math.random(1000, 9999))
+	end
+end

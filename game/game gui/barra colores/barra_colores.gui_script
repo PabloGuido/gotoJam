@@ -19,12 +19,14 @@ local ancho_barra_colores = 420;
 local direccion = -1;
 local velocidad = 500;
 local posiciones_de_colores;
-
+local orden_de_colores = {"red", "green", "blue"};
+local color_mas_cercano = nil;
 
 -- Vars funciones
 local mover_marcador;
 local cambiar_direccion;
 local posicion_inicial_del_marcador;
+local calcular_distancia_marcador;
 
 function init(self)
 	-- Nodos
@@ -41,6 +43,8 @@ function init(self)
 	
 	--
 	gui.set_enabled(barra_colores, false);
+
+	
 end
 
 function final(self)
@@ -64,6 +68,7 @@ function on_message(self, message_id, message, sender)
 		gui.set_enabled(barra_colores, false);
 	elseif message_id == parar_barra_msg then
 		print("Parar barra ** barra_colores");
+		calcular_distancia_marcador();
 	end
 end
 
@@ -88,7 +93,7 @@ end
 mover_marcador = function(dt)
 	if gui.is_enabled(barra_colores) then
 		local pos = gui.get_position(marcador);
-		print(pos);
+		--print(pos);
 		pos.x = pos.x + velocidad * dt * direccion;
 		gui.set_position(marcador, pos);
 		cambiar_direccion(pos.x);
@@ -110,7 +115,22 @@ posicion_inicial_del_marcador = function()
 
 end
 
+calcular_distancia_marcador = function()
+	local pos = gui.get_position(marcador);
+	local menor_distancia = 9999;
+	--local una_pos = posiciones_de_colores[1];
+	for i = 1, #posiciones_de_colores do
+		local color_pos = posiciones_de_colores[i];
+		local distancia = math.sqrt((color_pos.x - pos.x)^2 + (color_pos.y - pos.y)^2)
+		--print(distancia)
+		if color_mas_cercano == nil or distancia < menor_distancia then
+			menor_distancia = distancia;
+			color_mas_cercano = orden_de_colores[i]
+		end
+	end
+	datos.print(color_mas_cercano);
 
+end
 
 
 
