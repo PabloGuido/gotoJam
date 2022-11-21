@@ -4,7 +4,7 @@ local blue = {"blue", vmath.vector4(0,0,255,1)};
 
 -- vacc pasti curita comida
 local M = {};
-
+M.bicho = nil;
 M.estados = {};
 M.estados[1] = hash("envenenado") ;
 M.estados[2] = hash("paralizado");

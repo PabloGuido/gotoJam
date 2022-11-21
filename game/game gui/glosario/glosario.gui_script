@@ -62,7 +62,7 @@ function init(self)
 
 	-- Inicialización
 	msg.post("", "acquire_input_focus");
-	
+
 end
 
 function final(self)

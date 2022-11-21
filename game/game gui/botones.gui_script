@@ -1,4 +1,5 @@
 local datos = require("main.datos")
+local remedios = require("game.game gui.glosario.remedios")
 local botonera_x = datos.screen_size[1]/2;
 local botonera_y = datos.screen_size[2] - 80;
 -- Vars funciones
@@ -12,6 +13,7 @@ local aparecer_textos;
 local sumar_numerador_orden;
 local cambiar_color_boton;
 local restaurar_orden;
+local chequeo_correccion;
 
 -- Nodos
 local vacc_t;
@@ -19,11 +21,11 @@ local pasti_t;
 local curita_t;
 local comida_t;
 local tabla_textos;
-local restaurar;
+
 
 -- Vars
 local ultimo_boton_presionado = nil;
-local numerador_orden = 0;
+local numerador_orden = 1;
 local puede_clickear = true;
 
 function init(self)
@@ -42,12 +44,11 @@ function init(self)
 	self.boton_selecto = gui.get_node("boton_selecto");
 	gui.set_enabled(self.boton_selecto, false);
 
-	restaurar = gui.get_node("restaurar");
 	-- Posicion botonera
 	gui.set_position(self.botonera, vmath.vector3(botonera_x,botonera_y,0));
 
 	-- Flags
-	self.boton_activo = false;
+	self.boton_activo = nil;
 	self.boton_activo_c = nil;
 	-- Input - Inicialización
 	desaparecer_textos();
@@ -69,8 +70,9 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("color") then
-		--print(message.color)
-		cambiar_color_boton(self, self.boton_activo_c, message.color);
+		--pprint(message.color)
+		--cambiar_color_boton(self, self.boton_activo_c, message.color);
+		chequeo_correccion(self, message.color[1]);
 	end
 end
 
@@ -84,29 +86,29 @@ function on_input(self, action_id, action)
 		activar_boton(self, self.curita, curita_t);
 	elseif gui.pick_node(self.comida, action.x, action.y) and action.pressed then
 		activar_boton(self, self.comida, comida_t);
-	elseif self.boton_activo ~= false and action.pressed then
+	elseif self.boton_activo ~= nil and action.pressed then
 		--print("Desactivar barra 1");
 		desactivar_barra(self);
-	elseif gui.pick_node(restaurar, action.x, action.y) and action.pressed then
-		restaurar_orden(self);
 	end
 	
 end
 
 activar_boton = function(self, nombre_de_boton, ubt)
-	if self.boton_activo == false then
-		self.boton_activo_c = nombre_de_boton;
-		self.boton_activo = gui.get_id(nombre_de_boton);
-		ultimo_boton_presionado = ubt;
-		boton_selecto(self, gui.get_position(nombre_de_boton));
-		--print(self.boton_activo);
-		msg.post("barra_colores#barra_colores", "activar_barra")
-	elseif self.boton_activo ~= gui.get_id(nombre_de_boton) then
-		--print("Desactivar barra 2");
-		desactivar_barra(self);
-	elseif self.boton_activo == gui.get_id(nombre_de_boton) then
-		--print("Parar barra 1 ** botones.gui");
-		parar_barra(self);
+	if puede_clickear then
+		if self.boton_activo == nil then
+			self.boton_activo_c = nombre_de_boton;
+			self.boton_activo = gui.get_id(nombre_de_boton);
+			ultimo_boton_presionado = ubt;
+			boton_selecto(self, gui.get_position(nombre_de_boton));
+			print(self.boton_activo);
+			msg.post("barra_colores#barra_colores", "activar_barra")
+		elseif self.boton_activo ~= gui.get_id(nombre_de_boton) then
+			--print("Desactivar barra 2");
+			desactivar_barra(self);
+		elseif self.boton_activo == gui.get_id(nombre_de_boton) then
+			--print("Parar barra 1 ** botones.gui");
+			parar_barra(self);
+		end
 	end
 end
 
@@ -114,7 +116,7 @@ boton_selecto = function(self, pos)
 	gui.set_enabled(self.boton_selecto, true);
 	gui.set_position(self.boton_selecto, pos);
 end
-apagar_boton_selecto = function(self)	
+apagar_boton_selecto = function(self)
 	gui.set_enabled(self.boton_selecto, false);
 end
 
@@ -123,15 +125,16 @@ desactivar_barra = function(self)
 	ultimo_boton_presionado = nil;
 	apagar_boton_selecto(self);
 	msg.post("barra_colores#barra_colores", "desactivar_barra");
-	self.boton_activo = false;
+	self.boton_activo = nil;
 	
 end
 
 parar_barra = function(self)
+	puede_clickear = false;
 	msg.post("barra_colores#barra_colores", "parar_barra");
-	self.boton_activo = false;
+
 	apagar_boton_selecto(self);
-	aparecer_textos(ultimo_boton_presionado);
+
 end
 
 desaparecer_textos = function()
@@ -141,7 +144,7 @@ desaparecer_textos = function()
 end
 
 aparecer_textos = function(nodo)
-	sumar_numerador_orden();
+	--sumar_numerador_orden();
 	gui.set_enabled(nodo, true)
 	gui.set_text(nodo, numerador_orden)
 end
@@ -157,7 +160,7 @@ end
 
 restaurar_orden = function(self)
 	local clr_gry = vmath.vector4(0.8,0.8,0.8,1);
-	numerador_orden = 0;
+	numerador_orden = 1;
 	desactivar_barra(self);
 	desaparecer_textos();
 	cambiar_color_boton(self, self.vacc, clr_gry);
@@ -166,7 +169,23 @@ restaurar_orden = function(self)
 	cambiar_color_boton(self, self.comida, clr_gry);
 end
 
-
+chequeo_correccion = function(self, color)
+	
+	local estado_bicho = remedios.bicho;
+	print(self.boton_activo)
+	if self.boton_activo == remedios[estado_bicho].orden[numerador_orden] and color == remedios[estado_bicho][numerador_orden][1] then
+		print("Boton correcto")
+		aparecer_textos(ultimo_boton_presionado);
+		sumar_numerador_orden();
+		if numerador_orden >= 5 then
+			datos.print("Aplicar remedio")
+		end
+	else 
+		print("Boton incorrecto")
+	end
+	self.boton_activo = nil;
+	puede_clickear = true;
+end
 
 
 
