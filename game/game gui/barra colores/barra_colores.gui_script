@@ -44,7 +44,6 @@ function init(self)
 	
 	-- Inicialización
 	gui.set_enabled(barra_colores, false);
-
 	
 end
 

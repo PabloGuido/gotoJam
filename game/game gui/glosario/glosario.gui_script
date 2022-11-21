@@ -1,0 +1,54 @@
+local datos = require("main.datos")
+local remedios = require("main.remedios")
+local glosario_x = datos.screen_size[1]/2 - 390;
+local glosario_y = datos.screen_size[2]/2;
+
+-- Vars nodos
+local glosario;
+local instrucciones;
+function init(self)
+	-- Nodos
+	glosario = gui.get_node("glosario");
+	gui.set_position(glosario, vmath.vector3(glosario_x,glosario_y,0))
+
+	instrucciones = gui.get_node("instrucciones");
+	gui.set_position(instrucciones, vmath.vector3(datos.screen_size[1]/2,glosario_y - 240,0))
+
+	pprint(remedios)
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function update(self, dt)
+	-- Add update code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
