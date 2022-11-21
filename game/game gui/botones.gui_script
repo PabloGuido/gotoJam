@@ -7,6 +7,21 @@ local boton_selecto;
 local desactivar_barra;
 local apagar_boton_selecto;
 local parar_barra;
+local desaparecer_textos;
+local aparecer_textos;
+local sumar_numerador_orden;
+
+-- Nodos
+local vacc_t;
+local pasti_t;
+local curita_t;
+local comida_t;
+local tabla_textos;
+
+-- Vars
+local ultimo_boton_presionado = nil;
+local numerador_orden = 0;
+
 function init(self)
 	-- Nodos
 	self.botonera = gui.get_node("caja_botonera");
@@ -14,6 +29,12 @@ function init(self)
 	self.pasti = gui.get_node("pasti");
 	self.curita = gui.get_node("curita");
 	self.comida = gui.get_node("comida");
+	vacc_t = gui.get_node("vacuna_t"); 
+	pasti_t= gui.get_node("pasti_t");
+	curita_t = gui.get_node("curita_t");
+	comida_t = gui.get_node("comida_t");
+	tabla_textos = {vacc_t, pasti_t, curita_t, comida_t};
+
 	self.boton_selecto = gui.get_node("boton_selecto");
 	gui.set_enabled(self.boton_selecto, false);
 
@@ -23,7 +44,8 @@ function init(self)
 	-- Flags
 	self.boton_activo = false;
 
-	-- Input
+	-- Input - Inicialización
+	desaparecer_textos();
 	msg.post("", "acquire_input_focus");
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.1, 0.25, 0.25, 0) } )
 end
@@ -49,12 +71,16 @@ end
 function on_input(self, action_id, action)
 
 	if gui.pick_node(self.vacc, action.x, action.y) and action.pressed then
+		ultimo_boton_presionado = vacc_t;
 		activar_boton(self, self.vacc);
 	elseif gui.pick_node(self.pasti, action.x, action.y) and action.pressed then
+		ultimo_boton_presionado = pasti_t;
 		activar_boton(self, self.pasti);
 	elseif gui.pick_node(self.curita, action.x, action.y) and action.pressed then
+		ultimo_boton_presionado = curita_t;
 		activar_boton(self, self.curita);
 	elseif gui.pick_node(self.comida, action.x, action.y) and action.pressed then
+		ultimo_boton_presionado = comida_t;
 		activar_boton(self, self.comida);
 	elseif self.boton_activo ~= false and action.pressed then
 		--print("Desactivar barra 1");
@@ -70,7 +96,7 @@ activar_boton = function(self, nombre_de_boton)
 		--print(self.boton_activo);
 		msg.post("barra_colores#barra_colores", "activar_barra")
 	elseif self.boton_activo ~= gui.get_id(nombre_de_boton) then
-		--print("Desactivar barra 2");
+		print("Desactivar barra 2");
 		desactivar_barra(self);
 	elseif self.boton_activo == gui.get_id(nombre_de_boton) then
 		--print("Parar barra 1 ** botones.gui");
@@ -82,12 +108,13 @@ boton_selecto = function(self, pos)
 	gui.set_enabled(self.boton_selecto, true);
 	gui.set_position(self.boton_selecto, pos);
 end
-apagar_boton_selecto = function(self)
+apagar_boton_selecto = function(self)	
 	gui.set_enabled(self.boton_selecto, false);
 end
 
 
 desactivar_barra = function(self)
+	ultimo_boton_presionado = nil;
 	apagar_boton_selecto(self);
 	msg.post("barra_colores#barra_colores", "desactivar_barra");
 	self.boton_activo = false;
@@ -98,7 +125,29 @@ parar_barra = function(self)
 	msg.post("barra_colores#barra_colores", "parar_barra");
 	self.boton_activo = false;
 	apagar_boton_selecto(self);
+	print(ultimo_boton_presionado)
 end
+
+desaparecer_textos = function()
+	for i = 1, #tabla_textos do
+		gui.set_enabled(tabla_textos[i], false)
+	end
+end
+
+aparecer_textos = function(nodo, texto)	
+	sumar_numerador_orden();
+	gui.set_enabled(nodo, true)
+	gui.set_text(nodo, texto)
+end
+
+sumar_numerador_orden = function()
+	numerador_orden += 1
+end
+
+
+
+
+
 
 
 
