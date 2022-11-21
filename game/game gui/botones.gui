@@ -3,6 +3,10 @@ fonts {
   name: "system_font"
   font: "/builtins/fonts/system_font.font"
 }
+textures {
+  name: "gui"
+  texture: "/game/game gui/img/gui.atlas"
+}
 background_color {
   x: 0.0
   y: 0.0
@@ -146,9 +150,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.2
-    y: 0.101960786
-    z: 0.5019608
+    x: 0.8
+    y: 0.8
+    z: 0.8
     w: 1.0
   }
   type: TYPE_BOX
@@ -196,8 +200,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 100.0
+    y: 80.0
     z: 0.0
     w: 1.0
   }
@@ -207,38 +211,29 @@ nodes {
     z: 1.0
     w: 1.0
   }
-  type: TYPE_TEXT
+  type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  text: "vacc\n"
-  ""
-  font: "system_font"
-  id: "text"
+  texture: "gui/vacc"
+  id: "img"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "vacuna"
   layer: ""
   inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
   alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -267,9 +262,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.4
-    y: 0.101960786
-    z: 0.2
+    x: 0.8
+    y: 0.8
+    z: 0.8
     w: 1.0
   }
   type: TYPE_BOX
@@ -317,8 +312,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 100.0
+    y: 80.0
     z: 0.0
     w: 1.0
   }
@@ -328,37 +323,29 @@ nodes {
     z: 1.0
     w: 1.0
   }
-  type: TYPE_TEXT
+  type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  text: "pasti"
-  font: "system_font"
-  id: "text1"
+  texture: "gui/pasti"
+  id: "img1"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "pasti"
   layer: ""
   inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
   alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -387,9 +374,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.7019608
-    y: 0.3019608
-    z: 0.101960786
+    x: 0.8
+    y: 0.8
+    z: 0.8
     w: 1.0
   }
   type: TYPE_BOX
@@ -437,8 +424,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 100.0
+    y: 80.0
     z: 0.0
     w: 1.0
   }
@@ -448,37 +435,29 @@ nodes {
     z: 1.0
     w: 1.0
   }
-  type: TYPE_TEXT
+  type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  text: "curita"
-  font: "system_font"
-  id: "text2"
+  texture: "gui/curita"
+  id: "img2"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "curita"
   layer: ""
   inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
   alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 nodes {
@@ -507,9 +486,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.7019608
-    y: 0.5019608
-    z: 0.101960786
+    x: 0.8
+    y: 0.8
+    z: 0.8
     w: 1.0
   }
   type: TYPE_BOX
@@ -557,8 +536,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 200.0
-    y: 100.0
+    x: 100.0
+    y: 80.0
     z: 0.0
     w: 1.0
   }
@@ -568,37 +547,29 @@ nodes {
     z: 1.0
     w: 1.0
   }
-  type: TYPE_TEXT
+  type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  text: "comida"
-  font: "system_font"
-  id: "text3"
+  texture: "gui/comida"
+  id: "img3"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
-  outline {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
-  shadow {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-    w: 1.0
-  }
   adjust_mode: ADJUST_MODE_FIT
-  line_break: false
   parent: "comida"
   layer: ""
   inherit_alpha: true
+  slice9 {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 0.0
+  }
+  clipping_mode: CLIPPING_MODE_NONE
+  clipping_visible: true
+  clipping_inverted: false
   alpha: 1.0
-  outline_alpha: 1.0
-  shadow_alpha: 1.0
   template_node_child: false
-  text_leading: 1.0
-  text_tracking: 0.0
+  size_mode: SIZE_MODE_MANUAL
   custom_type: 0
 }
 material: "/builtins/materials/gui.material"

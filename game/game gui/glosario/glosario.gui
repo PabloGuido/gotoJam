@@ -753,7 +753,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacuna"
+  id: "primero"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -829,7 +829,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacuna"
+  parent: "primero"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -874,7 +874,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacuna1"
+  id: "segundo"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -950,7 +950,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacuna1"
+  parent: "segundo"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -995,7 +995,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacuna2"
+  id: "tercero"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -1071,7 +1071,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacuna2"
+  parent: "tercero"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -1116,7 +1116,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacuna3"
+  id: "cuarto"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -1192,7 +1192,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacuna3"
+  parent: "cuarto"
   layer: ""
   inherit_alpha: true
   alpha: 1.0

@@ -1,5 +1,5 @@
 local datos = require("main.datos")
-local remedios = require("main.remedios")
+local remedios = require("game.game gui.glosario.remedios")
 local glosario_x = datos.screen_size[1]/2 - 390;
 local glosario_y = datos.screen_size[2]/2;
 
