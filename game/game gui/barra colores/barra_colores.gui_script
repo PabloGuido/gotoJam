@@ -15,9 +15,11 @@ local blue
 -- Vars
 local marcador;
 local barra_colores;
+local ancho_barra_colores = 420;
 local direccion = -1;
 local velocidad = 500;
 local posiciones_de_colores;
+
 
 -- Vars funciones
 local mover_marcador;
@@ -94,9 +96,9 @@ mover_marcador = function(dt)
 end
 
 cambiar_direccion = function(posicion)
-	if posicion < -200 then
+	if posicion < -ancho_barra_colores/2 then
 		direccion = 1;
-	elseif posicion > 200 then
+	elseif posicion > ancho_barra_colores/2 then
 		direccion = -1;
 	end
 end
