@@ -20,26 +20,6 @@ instances {
   }
 }
 instances {
-  id: "bicho"
-  prototype: "/bicho/bicho.go"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
   id: "botones"
   prototype: "/game/game gui/botones.go"
   position {
@@ -122,6 +102,26 @@ instances {
 instances {
   id: "barra_de_vida"
   prototype: "/game/game gui/barra de vida/barra_de_vida.go"
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "bicho_fac"
+  prototype: "/bicho/bicho_fac.go"
   position {
     x: 0.0
     y: 0.0

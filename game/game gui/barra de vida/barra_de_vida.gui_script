@@ -13,6 +13,7 @@ function init(self)
 	vida = gui.get_node("vida");
 	gui.set_position(vida, vmath.vector3(vida_x, vida_y, 0));
 	escala = gui.get_scale(vida);
+	gui.set_enabled(vida, false);
 end
 
 function final(self)
@@ -25,13 +26,15 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("bajar_vida") then
 		bajar_vida(message.delta);
+	elseif message_id == hash("hay_bicho_nuevo") then
+		gui.set_enabled(vida, true);
 	end
 end
 
 
 bajar_vida = function(dt)
 	--0.03
-	escala.y = escala.y - 0.1 * dt
+	escala.y = escala.y - 0.03 * dt
 	gui.set_scale(vida, escala)
 	if escala.y <= 0 then
 		--print("Muere bicho - game over")

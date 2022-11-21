@@ -18,6 +18,7 @@ local restaurar_click;
 local orden_incorrecto;
 local aplicar_remedio;
 local murio_bicho;
+local hay_bicho_nuevo;
 
 -- Nodos
 local vacc_t;
@@ -69,7 +70,7 @@ function init(self)
 	self.boton_activo_c = nil;
 	-- Input - Inicialización
 	desaparecer_textos();
-	msg.post("", "acquire_input_focus");
+	--msg.post("", "acquire_input_focus");
 	msg.post("@render:", "clear_color", { color = vmath.vector4(0.1, 0.25, 0.25, 1) } )
 end
 
@@ -80,7 +81,7 @@ function final(self)
 end
 
 function update(self, dt)
-	if not remedios.bicho_curado and not bicho_muerto then
+	if not remedios.bicho_curado and not bicho_muerto and remedios.hay_bicho then
 		msg.post("barra_de_vida", "bajar_vida", {delta = dt});
 	end
 end
@@ -92,6 +93,9 @@ function on_message(self, message_id, message, sender)
 		chequeo_correccion(self, message.color[1]);
 	elseif message_id == hash("muere_bicho") then
 		murio_bicho(self);
+	elseif message_id == hash("bicho_nuevo") then
+		hay_bicho_nuevo();
+		print("hay bicho nuevo");
 	end
 end
 
@@ -231,18 +235,25 @@ end
 
 aplicar_remedio = function()
 	datos.print("Aplicar remedio")
+	print("Aplicar remedio")
 	msg.post("/sonidos", "sonido", {sonido = "#remedio"})
 	remedios.bicho_curado = true;
 end
 
 murio_bicho = function(self)
 	bicho_muerto = true;
+	remedios.hay_bicho = false;
 	print("muete el bicho");
 	desactivar_barra(self);
 	self.boton_activo = nil;
 	puede_clickear = false;
 end
 
+hay_bicho_nuevo = function()
+	puede_clickear = true;
+	msg.post("barra_de_vida", "hay_bicho_nuevo");
+	msg.post("", "acquire_input_focus");
+end
 
 
 
