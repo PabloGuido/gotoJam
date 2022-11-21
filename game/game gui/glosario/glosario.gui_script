@@ -16,6 +16,11 @@ local primero_img;
 local segundo_img;
 local tercero_img;
 local cuarto_img;
+
+-- Vars
+local tabla_img;
+-- Vars funciones
+local orden_remedios;
 function init(self)
 	-- Nodos
 	glosario = gui.get_node("glosario");
@@ -32,10 +37,14 @@ function init(self)
 	segundo_img = gui.get_node("segundo_img");
 	tercero_img = gui.get_node("tercero_img");
 	cuarto_img = gui.get_node("cuarto_img");
-	
-	gui.play_flipbook(primero_img, "comida")
+	tabla_img = {}
+	tabla_img[1] = {primero, primero_img}
+	tabla_img[2] = {segundo, segundo_img}
+	tabla_img[3] = {tercero, tercero_img}
+	tabla_img[4] = {cuarto, cuarto_img}
 	--gui.set_enabled(instrucciones, false);
 	pprint(remedios)
+	orden_remedios();
 end
 
 function final(self)
@@ -68,8 +77,20 @@ function on_input(self, action_id, action)
 	-- Remove this function if not needed
 end
 
-function on_reload(self)
-	-- Add reload-handling code here
-	-- Learn more: https://defold.com/manuals/hot-reload/
-	-- Remove this function if not needed
+orden_remedios = function(que_remedio)
+	for i = 1, #tabla_img do
+		gui.play_flipbook(tabla_img[i][2], remedios.envenenado.orden[i])
+		gui.set_color(tabla_img[i][1], remedios.envenenado[i][2])
+	end
 end
+
+
+
+
+
+
+
+
+
+
+	
