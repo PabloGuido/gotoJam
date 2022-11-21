@@ -1,0 +1,50 @@
+local datos = require("main.datos");
+local vida_x = datos.screen_size[1]/2 + 400;
+local vida_y = datos.screen_size[2] - 480;
+
+-- Nodos
+local vida;
+local cantidad_vida = 100;
+local escala;
+
+-- Vars funciones
+local bajar_vida;
+function init(self)
+	vida = gui.get_node("vida");
+	gui.set_position(vida, vmath.vector3(vida_x, vida_y, 0));
+	escala = gui.get_scale(vida);
+end
+
+function final(self)
+	-- Add finalization code here
+	-- Learn more: https://defold.com/manuals/script/
+	-- Remove this function if not needed
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("bajar_vida") then
+		bajar_vida(message.delta);
+	end
+end
+
+
+bajar_vida = function(dt)
+	escala.y = escala.y - 0.03 * dt
+	gui.set_scale(vida, escala)
+	if escala.y <= 0 then
+		print("Muere bicho - game over")
+	end
+end
+
+
+
+
+
+
+
+
+
+
+
+	
