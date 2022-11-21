@@ -175,6 +175,7 @@ chequeo_correccion = function(self, color)
 	print(self.boton_activo)
 	if self.boton_activo == remedios[estado_bicho].orden[numerador_orden] and color == remedios[estado_bicho][numerador_orden][1] then
 		print("Boton correcto")
+		msg.post("/sonidos", "sonido", {sonido = "#ok"})
 		aparecer_textos(ultimo_boton_presionado);
 		sumar_numerador_orden();
 		if numerador_orden >= 5 then
@@ -182,6 +183,7 @@ chequeo_correccion = function(self, color)
 		end
 	else 
 		print("Boton incorrecto")
+		msg.post("/sonidos", "sonido", {sonido = "#not_ok"})
 	end
 	self.boton_activo = nil;
 	puede_clickear = true;
