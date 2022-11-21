@@ -3,7 +3,7 @@ local remedios = require("game.game gui.glosario.remedios")
 local pos_x = datos.screen_size[1]/2
 local pos_y = datos.screen_size[2]/2
 go.property("vida", 0)
-go.property("estado", 1)
+go.property("estado", 2)
 function init(self)
 	go.set_position(vmath.vector3(pos_x, pos_y, 0));
 	remedios.bicho = self.estado

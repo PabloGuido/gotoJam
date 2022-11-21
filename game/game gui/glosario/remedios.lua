@@ -23,6 +23,7 @@ M[1][4] = red
 -- PARALIZADO --
 M[2] = {}
 M[2].img = {"curita", "vacc", "pasti", "comida"}
+M[2].orden = {hash("curita"), hash("vacuna"), hash("pasti"), hash("comida")};
 M[2][1] = green
 M[2][2] = blue
 M[2][3] = red
