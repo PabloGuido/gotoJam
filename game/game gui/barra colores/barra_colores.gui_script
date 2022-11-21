@@ -7,20 +7,33 @@ local activar_barra_msg = hash("activar_barra");
 local desactivar_barra_msg = hash("desactivar_barra");
 local parar_barra_msg = hash("parar_barra");
 
+-- Var nodos
+local red
+local green
+local blue
+
 -- Vars
 local marcador;
 local barra_colores;
 local direccion = -1;
-local velocidad = 300;
+local velocidad = 500;
+local posiciones_de_colores;
 
 -- Vars funciones
 local mover_marcador;
 local cambiar_direccion;
+local posicion_inicial_del_marcador;
 
 function init(self)
 	-- Nodos
 	barra_colores = gui.get_node("caja_colores");
 	marcador = gui.get_node("marcador");
+	red = gui.get_node("red");
+	green = gui.get_node("green");
+	blue = gui.get_node("blue");
+
+	-- Posiciones de colores
+	posiciones_de_colores = {gui.get_position(red), gui.get_position(green), gui.get_position(blue)}
 	-- Posicion botonera
 	gui.set_position(barra_colores, vmath.vector3(botonera_x,botonera_y,0));
 	
@@ -43,6 +56,7 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == activar_barra_msg then
+		posicion_inicial_del_marcador();
 		gui.set_enabled(barra_colores, true);
 	elseif message_id == desactivar_barra_msg then
 		gui.set_enabled(barra_colores, false);
@@ -80,13 +94,19 @@ mover_marcador = function(dt)
 end
 
 cambiar_direccion = function(posicion)
-	if posicion < -300 then
+	if posicion < -200 then
 		direccion = 1;
-	elseif posicion > 300 then
+	elseif posicion > 200 then
 		direccion = -1;
 	end
 end
 
+posicion_inicial_del_marcador = function()
+	local num_random = math.random(1, 3);
+	local pos_random = posiciones_de_colores[num_random];
+	gui.set_position(marcador, pos_random);
+
+end
 
 
 
