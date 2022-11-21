@@ -102,7 +102,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "paralizado"
+  id: "envenenado"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -177,7 +177,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "paralizado"
+  parent: "envenenado"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -222,7 +222,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacc1"
+  id: "paralizado"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -297,7 +297,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacc1"
+  parent: "paralizado"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -342,7 +342,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacc2"
+  id: "quemado"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -417,7 +417,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacc2"
+  parent: "quemado"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -462,7 +462,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacc3"
+  id: "congelado"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -537,7 +537,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacc3"
+  parent: "congelado"
   layer: ""
   inherit_alpha: true
   alpha: 1.0
@@ -582,7 +582,7 @@ nodes {
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
   texture: ""
-  id: "vacc4"
+  id: "debilitado"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
   pivot: PIVOT_CENTER
@@ -657,7 +657,7 @@ nodes {
   }
   adjust_mode: ADJUST_MODE_FIT
   line_break: false
-  parent: "vacc4"
+  parent: "debilitado"
   layer: ""
   inherit_alpha: true
   alpha: 1.0

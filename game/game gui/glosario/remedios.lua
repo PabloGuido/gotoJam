@@ -9,18 +9,18 @@ local blue_c = vmath.vector4(0,0,255,1);
 local M = {};
 
 M.estados = {};
-M.estados[1] = "envenenado";
-M.estados[2] = "paralizado";
-M.estados[3] = "quemado";
-M.estados[4] = "congelado";
-M.estados[5] = "debilitado";
-
-M.envenenado = {}
-M.envenenado.orden = {"vacc", "pasti", "curita", "comida"}
-M.envenenado[1] = {red, red_c};
-M.envenenado[2] = {green, green_c};
-M.envenenado[3] = {blue, blue_c};
-M.envenenado[4] = {red, red_c};
+M.estados[1] = hash("envenenado") ;
+M.estados[2] = hash("paralizado");
+M.estados[3] = hash("quemado");
+M.estados[4] = hash("congelado");
+M.estados[5] = hash("debilitado");
+	-- ENVENENADO --
+M[1] = {}
+M[1].orden = {"vacc", "pasti", "curita", "comida"}
+M[1][1] = {red, red_c};
+M[1][2] = {green, green_c};
+M[1][3] = {blue, blue_c};
+M[1][4] = {red, red_c};
 
 
 

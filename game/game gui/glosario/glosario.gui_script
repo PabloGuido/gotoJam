@@ -7,6 +7,11 @@ local glosario_y = datos.screen_size[2]/2;
 -- Vars nodos
 local glosario;
 local instrucciones;
+local envenenado;
+local paralizado;
+local quemado;
+local congelado;
+local debilitado;
 
 local primero;
 local segundo;
@@ -19,12 +24,23 @@ local cuarto_img;
 
 -- Vars
 local tabla_img;
+local tabla_estados = {};
 -- Vars funciones
 local orden_remedios;
 function init(self)
 	-- Nodos
 	glosario = gui.get_node("glosario");
 	gui.set_position(glosario, vmath.vector3(glosario_x,glosario_y,0))
+	envenenado = gui.get_node("envenenado");
+	paralizado = gui.get_node("paralizado");
+	quemado = gui.get_node("quemado");
+	congelado = gui.get_node("congelado");
+	debilitado = gui.get_node("debilitado");
+	table.insert(tabla_estados, 1, envenenado)
+	table.insert(tabla_estados, 2, paralizado)
+	table.insert(tabla_estados, 3, quemado)
+	table.insert(tabla_estados, 4, congelado)
+	table.insert(tabla_estados, 5, debilitado)
 	
 	instrucciones = gui.get_node("instrucciones");
 	gui.set_position(instrucciones, vmath.vector3(datos.screen_size[1]/2,glosario_y - 240,0));
@@ -42,9 +58,13 @@ function init(self)
 	tabla_img[2] = {segundo, segundo_img}
 	tabla_img[3] = {tercero, tercero_img}
 	tabla_img[4] = {cuarto, cuarto_img}
-	--gui.set_enabled(instrucciones, false);
-	pprint(remedios)
-	orden_remedios();
+	gui.set_enabled(instrucciones, false);
+	--pprint(remedios)
+	--orden_remedios();
+	pprint(tabla_estados)
+	-- Inicialización
+	msg.post("", "acquire_input_focus");
+	
 end
 
 function final(self)
@@ -66,21 +86,25 @@ function on_message(self, message_id, message, sender)
 end
 
 function on_input(self, action_id, action)
-	-- Add input-handling code here. The game object this script is attached to
-	-- must have acquired input focus:
-	--
-	--    msg.post(".", "acquire_input_focus")
-	--
-	-- All mapped input bindings will be received. Mouse and touch input will
-	-- be received regardless of where on the screen it happened.
-	-- Learn more: https://defold.com/manuals/input/
-	-- Remove this function if not needed
+	if action.pressed then
+		for i = 1, #tabla_estados do
+			if gui.pick_node(tabla_estados[i], action.x, action.y)then
+				if gui.get_id(tabla_estados[i])  == remedios.estados[i] then
+					print(i)
+					orden_remedios(i);
+				end
+			end
+		end
+		--for print(gui.get_id(glosario))
+
+	end
 end
 
 orden_remedios = function(que_remedio)
 	for i = 1, #tabla_img do
-		gui.play_flipbook(tabla_img[i][2], remedios.envenenado.orden[i])
-		gui.set_color(tabla_img[i][1], remedios.envenenado[i][2])
+		gui.set_enabled(instrucciones, true);
+		gui.play_flipbook(tabla_img[i][2], remedios[que_remedio].orden[i])
+		gui.set_color(tabla_img[i][1], remedios[que_remedio][i][2])
 	end
 end
 
