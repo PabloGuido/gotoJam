@@ -1,19 +1,31 @@
 local datos = require("main.datos")
 local botonera_x = datos.screen_size[1]/2;
-local botonera_y = datos.screen_size[2] - 160;
+local botonera_y = datos.screen_size[2] - 180;
 
 -- Hashes
 local activar_barra_msg = hash("activar_barra");
 local desactivar_barra_msg = hash("desactivar_barra");
 local parar_barra_msg = hash("parar_barra");
+
+-- Vars
+local marcador;
+local barra_colores;
+local direccion = -1;
+local velocidad = 300;
+
+-- Vars funciones
+local mover_marcador;
+local cambiar_direccion;
+
 function init(self)
 	-- Nodos
-	self.barra = gui.get_node("caja_colores");
+	barra_colores = gui.get_node("caja_colores");
+	marcador = gui.get_node("marcador");
 	-- Posicion botonera
-	gui.set_position(self.barra, vmath.vector3(botonera_x,botonera_y,0));
+	gui.set_position(barra_colores, vmath.vector3(botonera_x,botonera_y,0));
 	
 	--
-	gui.set_enabled(self.barra, false);
+	gui.set_enabled(barra_colores, false);
 end
 
 function final(self)
@@ -23,6 +35,7 @@ function final(self)
 end
 
 function update(self, dt)
+	mover_marcador(dt);
 	-- Add update code here
 	-- Learn more: https://defold.com/manuals/script/
 	-- Remove this function if not needed
@@ -30,9 +43,9 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == activar_barra_msg then
-		gui.set_enabled(self.barra, true);
+		gui.set_enabled(barra_colores, true);
 	elseif message_id == desactivar_barra_msg then
-		gui.set_enabled(self.barra, false);
+		gui.set_enabled(barra_colores, false);
 	elseif message_id == parar_barra_msg then
 		print("Parar barra ** barra_colores");
 	end
@@ -55,3 +68,32 @@ function on_reload(self)
 	-- Learn more: https://defold.com/manuals/hot-reload/
 	-- Remove this function if not needed
 end
+
+mover_marcador = function(dt)
+	if gui.is_enabled(barra_colores) then
+		local pos = gui.get_position(marcador);
+		print(pos);
+		pos.x = pos.x + velocidad * dt * direccion;
+		gui.set_position(marcador, pos);
+		cambiar_direccion(pos.x);
+	end
+end
+
+cambiar_direccion = function(posicion)
+	if posicion < -300 then
+		direccion = 1;
+	elseif posicion > 300 then
+		direccion = -1;
+	end
+end
+
+
+
+
+
+
+
+
+
+
+
