@@ -5,6 +5,7 @@ local botonera_y = datos.screen_size[2] - 160;
 -- Hashes
 local activar_barra_msg = hash("activar_barra");
 local desactivar_barra_msg = hash("desactivar_barra");
+local parar_barra_msg = hash("parar_barra");
 function init(self)
 	-- Nodos
 	self.barra = gui.get_node("caja_colores");
@@ -32,6 +33,8 @@ function on_message(self, message_id, message, sender)
 		gui.set_enabled(self.barra, true);
 	elseif message_id == desactivar_barra_msg then
 		gui.set_enabled(self.barra, false);
+	elseif message_id == parar_barra_msg then
+		print("Parar barra ** barra_colores");
 	end
 end
 

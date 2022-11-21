@@ -6,6 +6,7 @@ local activar_boton;
 local boton_selecto;
 local desactivar_barra;
 local apagar_boton_selecto;
+local parar_barra;
 function init(self)
 	-- Nodos
 	self.botonera = gui.get_node("caja_botonera");
@@ -72,7 +73,8 @@ activar_boton = function(self, nombre_de_boton)
 		print("Desactivar barra 2");
 		desactivar_barra(self);
 	elseif self.boton_activo == gui.get_id(nombre_de_boton) then
-		print("Parar barra");
+		print("Parar barra ** botones.gui");
+		parar_barra(self);
 	end
 end
 
@@ -92,7 +94,9 @@ desactivar_barra = function(self)
 	
 end
 
-
+parar_barra = function(self)
+	msg.post("barra_colores#barra_colores", "parar_barra");
+end
 
 
 
