@@ -57,7 +57,7 @@ function on_input(self, action_id, action)
 	elseif gui.pick_node(self.comida, action.x, action.y) and action.pressed then
 		activar_boton(self, self.comida);
 	elseif self.boton_activo ~= false and action.pressed then
-		print("Desactivar barra 1");
+		--print("Desactivar barra 1");
 		desactivar_barra(self);
 	end
 	
@@ -67,13 +67,13 @@ activar_boton = function(self, nombre_de_boton)
 	if self.boton_activo == false then
 		self.boton_activo = gui.get_id(nombre_de_boton);
 		boton_selecto(self, gui.get_position(nombre_de_boton));
-		print(self.boton_activo);
+		--print(self.boton_activo);
 		msg.post("barra_colores#barra_colores", "activar_barra")
 	elseif self.boton_activo ~= gui.get_id(nombre_de_boton) then
-		print("Desactivar barra 2");
+		--print("Desactivar barra 2");
 		desactivar_barra(self);
 	elseif self.boton_activo == gui.get_id(nombre_de_boton) then
-		print("Parar barra ** botones.gui");
+		--print("Parar barra 1 ** botones.gui");
 		parar_barra(self);
 	end
 end
@@ -96,6 +96,8 @@ end
 
 parar_barra = function(self)
 	msg.post("barra_colores#barra_colores", "parar_barra");
+	self.boton_activo = false;
+	apagar_boton_selecto(self);
 end
 
 
