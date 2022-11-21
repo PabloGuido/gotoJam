@@ -10,6 +10,7 @@ local parar_barra;
 local desaparecer_textos;
 local aparecer_textos;
 local sumar_numerador_orden;
+local cambiar_color_boton;
 
 -- Nodos
 local vacc_t;
@@ -43,7 +44,7 @@ function init(self)
 
 	-- Flags
 	self.boton_activo = false;
-
+	self.boton_activo_c = nil;
 	-- Input - Inicialización
 	desaparecer_textos();
 	msg.post("", "acquire_input_focus");
@@ -63,9 +64,10 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("color") then
+		print(message.color)
+		cambiar_color_boton(self, self.boton_activo_c, message.color);
+	end
 end
 
 function on_input(self, action_id, action)
@@ -91,12 +93,13 @@ end
 
 activar_boton = function(self, nombre_de_boton)
 	if self.boton_activo == false then
+		self.boton_activo_c = nombre_de_boton;
 		self.boton_activo = gui.get_id(nombre_de_boton);
 		boton_selecto(self, gui.get_position(nombre_de_boton));
 		--print(self.boton_activo);
 		msg.post("barra_colores#barra_colores", "activar_barra")
 	elseif self.boton_activo ~= gui.get_id(nombre_de_boton) then
-		print("Desactivar barra 2");
+		--print("Desactivar barra 2");
 		desactivar_barra(self);
 	elseif self.boton_activo == gui.get_id(nombre_de_boton) then
 		--print("Parar barra 1 ** botones.gui");
@@ -125,7 +128,7 @@ parar_barra = function(self)
 	msg.post("barra_colores#barra_colores", "parar_barra");
 	self.boton_activo = false;
 	apagar_boton_selecto(self);
-	print(ultimo_boton_presionado)
+	aparecer_textos(ultimo_boton_presionado);
 end
 
 desaparecer_textos = function()
@@ -134,17 +137,20 @@ desaparecer_textos = function()
 	end
 end
 
-aparecer_textos = function(nodo, texto)	
+aparecer_textos = function(nodo)
 	sumar_numerador_orden();
 	gui.set_enabled(nodo, true)
-	gui.set_text(nodo, texto)
+	gui.set_text(nodo, numerador_orden)
 end
 
 sumar_numerador_orden = function()
-	numerador_orden += 1
+	numerador_orden = numerador_orden + 1;
 end
 
-
+cambiar_color_boton = function(self, nodo, colorc)
+	gui.set_color(nodo, colorc)
+	self.boton_activo_c = nil;
+end
 
 
 

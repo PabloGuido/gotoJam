@@ -19,7 +19,9 @@ local ancho_barra_colores = 420;
 local direccion = -1;
 local velocidad = 500;
 local posiciones_de_colores;
-local orden_de_colores = {"red", "green", "blue"};
+local orden_de_colores = {vmath.vector4(255,0,0,1), vmath.vector4(0,128,0,1), vmath.vector4(0,0,255,1)};
+
+
 local color_mas_cercano = nil;
 
 -- Vars funciones
@@ -109,7 +111,8 @@ calcular_distancia_marcador = function()
 			color_mas_cercano = orden_de_colores[i]
 		end
 	end
-	datos.print(color_mas_cercano);
+	--datos.print(color_mas_cercano);
+	msg.post("botones", "color", {color = color_mas_cercano});
 	parar_barra();
 end
 

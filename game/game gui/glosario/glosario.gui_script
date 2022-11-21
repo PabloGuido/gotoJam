@@ -99,7 +99,7 @@ end
 orden_remedios = function(que_remedio)
 	for i = 1, #tabla_img do
 		gui.set_enabled(instrucciones, true);
-		gui.play_flipbook(tabla_img[i][2], remedios[que_remedio].orden[i])
+		gui.play_flipbook(tabla_img[i][2], remedios[que_remedio].img[i])
 		gui.set_color(tabla_img[i][1], remedios[que_remedio][i][2])
 	end
 end
