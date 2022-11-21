@@ -16,6 +16,8 @@ local restaurar_orden;
 local chequeo_correccion;
 local restaurar_click;
 local orden_incorrecto;
+local aplicar_remedio;
+local murio_bicho;
 
 -- Nodos
 local vacc_t;
@@ -27,6 +29,9 @@ local vacc1
 local pasti1
 local curita1
 local comida1
+
+-- Flags
+local bicho_muerto = false;
 
 
 -- Vars
@@ -75,7 +80,9 @@ function final(self)
 end
 
 function update(self, dt)
-	msg.post("barra_de_vida", "bajar_vida", {delta = dt});
+	if not remedios.bicho_curado and not bicho_muerto then
+		msg.post("barra_de_vida", "bajar_vida", {delta = dt});
+	end
 end
 
 function on_message(self, message_id, message, sender)
@@ -83,6 +90,8 @@ function on_message(self, message_id, message, sender)
 		--pprint(message.color)
 		--cambiar_color_boton(self, self.boton_activo_c, message.color);
 		chequeo_correccion(self, message.color[1]);
+	elseif message_id == hash("muere_bicho") then
+		murio_bicho(self);
 	end
 end
 
@@ -194,12 +203,11 @@ chequeo_correccion = function(self, color)
 		aparecer_textos(ultimo_boton_presionado);
 		gui.set_enabled(self.boton_activo_c, false);
 		local colorcito_back = remedios[estado_bicho][numerador_orden][2];
-		colorcito_back.w = 0.75;
-		gui.set_color(boton_back, colorcito_back)
+		colorcito_back2 = vmath.vector4(0,0,0,0.25);
+		gui.set_color(boton_back, colorcito_back-colorcito_back2)
 		sumar_numerador_orden();
 		if numerador_orden >= 5 then
-			datos.print("Aplicar remedio")
-			msg.post("/sonidos", "sonido", {sonido = "#remedio"})
+			aplicar_remedio();
 			return
 		end
 		restaurar_click(self)
@@ -221,9 +229,19 @@ orden_incorrecto = function(self)
 	timer.delay(1.5, false, restaurar_click)
 end
 
+aplicar_remedio = function()
+	datos.print("Aplicar remedio")
+	msg.post("/sonidos", "sonido", {sonido = "#remedio"})
+	remedios.bicho_curado = true;
+end
 
-
-
+murio_bicho = function(self)
+	bicho_muerto = true;
+	print("muete el bicho");
+	desactivar_barra(self);
+	self.boton_activo = nil;
+	puede_clickear = false;
+end
 
 
 
