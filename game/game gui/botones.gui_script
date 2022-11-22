@@ -21,6 +21,7 @@ local murio_bicho;
 local hay_bicho_nuevo;
 local bicho_curado;
 local restaurar_botones;
+local restar_vidas;
 
 -- Nodos
 local vacc_t;
@@ -32,6 +33,7 @@ local vacc1
 local pasti1
 local curita1
 local comida1
+local vidas_txt
 
 -- Flags
 local bicho_muerto = false;
@@ -42,6 +44,8 @@ local ultimo_boton_presionado = nil;
 local numerador_orden = 1;
 local puede_clickear = true;
 local boton_back = nil;
+local vidas = 2;
+local score = 0;
 
 function init(self)
 	-- Nodos
@@ -64,6 +68,7 @@ function init(self)
 	self.boton_selecto = gui.get_node("boton_selecto");
 	gui.set_enabled(self.boton_selecto, false);
 
+	vidas_txt = gui.get_node("vidas");
 	-- Posicion botonera
 	gui.set_position(self.botonera, vmath.vector3(botonera_x,botonera_y,0));
 
@@ -246,13 +251,16 @@ end
 murio_bicho = function(self)
 	bicho_muerto = true;
 	remedios.hay_bicho = false;
-	print("muete el bicho");
+	print("muere el bicho");
 	desactivar_barra(self);
 	self.boton_activo = nil;
 	puede_clickear = false;
+	restar_vidas();
+	
 end
 
 hay_bicho_nuevo = function(self)
+	bicho_muerto = false;
 	puede_clickear = true;
 	msg.post("barra_de_vida", "hay_bicho_nuevo");
 	msg.post("", "acquire_input_focus");
@@ -272,6 +280,23 @@ restaurar_botones = function(self)
 	gui.set_enabled(self.curita, true);
 	gui.set_enabled(self.comida, true);
 end
+
+restar_vidas = function()
+	vidas = vidas - 1;
+	gui.set_text(vidas_txt, "vidas: " .. vidas);
+	if vidas <= 0 then
+		datos.game_over = true;
+		msg.post(remedios.bicho_url, "game_over")
+		return
+	end
+	msg.post(remedios.bicho_url, "murio_bicho")
+end
+
+
+
+
+
+
 
 
 

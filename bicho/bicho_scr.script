@@ -6,9 +6,16 @@ go.property("vida", 0)
 go.property("estado", 0)
 go.property("curado", false)
 
+-- Vars
+local pos;
 -- Vars funciones
 local terminar_bicho;
+local bicho_curado_anim;
+local murio_bicho_anim;
+local game_over_anim;
+
 function init(self)
+	pos = go.get_position()
 	go.set_position(vmath.vector3(pos_x, pos_y, 0));
 	remedios.bicho = self.estado;
 	remedios.bicho_curado = self.curado;
@@ -18,22 +25,53 @@ function init(self)
 end
 
 function final(self)
-	msg.post("bicho_fac", "crear_bicho_nuevo");
+	if datos.game_over then
+		print("GAME OVER")
+	else
+		msg.post("bicho_fac", "crear_bicho_nuevo");
+	end
 end
 
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("bicho_curado") then
-		print("ASODASODIJAOSIDJOAISJDOAISJDOIASJD")
-		timer.delay(3, false, terminar_bicho)
+		
+		bicho_curado_anim();
+		--go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 2)
+		--timer.delay(3, false, terminar_bicho)
+	elseif message_id == hash("murio_bicho") then
+		murio_bicho_anim();
+	elseif message_id == hash("game_over") then
+		murio_bicho_anim();
 	end
 end
 
 terminar_bicho = function()
 	go.delete();
-
 end
 
+bicho_curado_anim = function()
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_PINGPONG, pos_y+30, go.EASING_INBOUNCE, 3, 0,
+	function()
+		go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.75)
+		timer.delay(1.5, false, terminar_bicho)
+	end)
+end
+
+murio_bicho_anim = function()
+	go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 3, 0,
+	function()
+	timer.delay(1.5, false, terminar_bicho)
+	end)
+end
+
+game_over_anim = function()
+	go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 3, 0,
+	function()
+		go.delete();
+	end)
+
+end
 
 
 

@@ -27,6 +27,8 @@ function on_message(self, message_id, message, sender)
 	if message_id == hash("bajar_vida") then
 		bajar_vida(message.delta);
 	elseif message_id == hash("hay_bicho_nuevo") then
+		escala.y = 1;
+		gui.set_scale(vida, escala);
 		gui.set_enabled(vida, true);
 	elseif message_id == hash("bicho_curado") then
 		escala.y = 1;
@@ -38,7 +40,7 @@ end
 
 bajar_vida = function(dt)
 	--0.03
-	escala.y = escala.y - 0.03 * dt
+	escala.y = escala.y - 0.25 * dt
 	gui.set_scale(vida, escala)
 	if escala.y <= 0 then
 		--print("Muere bicho - game over")
