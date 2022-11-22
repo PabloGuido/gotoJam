@@ -1,7 +1,7 @@
 script: "/game/game gui/glosario/glosario.gui_script"
 fonts {
   name: "system_font"
-  font: "/builtins/fonts/system_font.font"
+  font: "/main/system_font2.font"
 }
 textures {
   name: "gui"
