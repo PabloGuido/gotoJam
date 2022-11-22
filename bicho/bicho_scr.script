@@ -5,7 +5,7 @@ local pos_y = datos.screen_size[2]/2
 go.property("vida", 0)
 go.property("estado", 0)
 go.property("curado", false)
-
+math.randomseed(100000 * (socket.gettime() % 1))
 -- Vars
 local pos;
 -- Vars funciones
@@ -22,11 +22,14 @@ function init(self)
 	remedios.hay_bicho = true;
 	remedios.bicho_url = msg.url();
 	msg.post("botones", "bicho_nuevo");
+	label.set_text("#label", remedios.estados[self.estado+5])
+	
 end
 
 function final(self)
 	if datos.game_over then
 		print("GAME OVER")
+		msg.post("game_start", "game_over")
 	else
 		msg.post("bicho_fac", "crear_bicho_nuevo");
 	end
@@ -48,9 +51,11 @@ end
 
 terminar_bicho = function()
 	go.delete();
+	
 end
 
 bicho_curado_anim = function()
+	label.set_text("#label", "")
 	go.animate(go.get_id(), "position.y", go.PLAYBACK_ONCE_PINGPONG, pos_y+30, go.EASING_INBOUNCE, 3, 0,
 	function()
 		go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 0.75)
@@ -59,7 +64,7 @@ bicho_curado_anim = function()
 end
 
 murio_bicho_anim = function()
-	go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 3, 0,
+	go.animate("#sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 2, 0,
 	function()
 	timer.delay(1.5, false, terminar_bicho)
 	end)

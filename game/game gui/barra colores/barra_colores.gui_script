@@ -17,7 +17,7 @@ local marcador;
 local barra_colores;
 local ancho_barra_colores = 420;
 local direccion = -1;
-local velocidad = 500;
+local velocidad = datos.velocidad;
 local posiciones_de_colores;
 local orden_de_colores = {{"red", vmath.vector4(255,0,0,1)}, {"green", vmath.vector4(0,128,0,1)}, {"blue", vmath.vector4(0,0,255,1)}};
 
@@ -78,7 +78,7 @@ mover_marcador = function(dt)
 	if gui.is_enabled(barra_colores) then
 		local pos = gui.get_position(marcador);
 		--print(pos);
-		pos.x = pos.x + velocidad * dt * direccion;
+		pos.x = pos.x + datos.velocidad * dt * direccion;
 		gui.set_position(marcador, pos);
 		cambiar_direccion(pos.x);
 	end

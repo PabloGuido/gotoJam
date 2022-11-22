@@ -1367,7 +1367,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "vidas : 2"
+  text: "vidas : 3"
   font: "system_font"
   id: "vidas"
   xanchor: XANCHOR_NONE

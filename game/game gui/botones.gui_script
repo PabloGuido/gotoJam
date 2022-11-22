@@ -22,6 +22,7 @@ local hay_bicho_nuevo;
 local bicho_curado;
 local restaurar_botones;
 local restar_vidas;
+local restaurar_vidas;
 
 -- Nodos
 local vacc_t;
@@ -44,7 +45,7 @@ local ultimo_boton_presionado = nil;
 local numerador_orden = 1;
 local puede_clickear = true;
 local boton_back = nil;
-local vidas = 2;
+local vidas = 3;
 local score = 0;
 
 function init(self)
@@ -265,6 +266,10 @@ hay_bicho_nuevo = function(self)
 	msg.post("barra_de_vida", "hay_bicho_nuevo");
 	msg.post("", "acquire_input_focus");
 	restaurar_botones(self);
+	if datos.game_over then
+		datos.game_over = false;
+		restaurar_vidas();
+	end
 end
 
 bicho_curado = function(self)
@@ -292,7 +297,10 @@ restar_vidas = function()
 	msg.post(remedios.bicho_url, "murio_bicho")
 end
 
-
+restaurar_vidas = function()
+	vidas = 3
+	gui.set_text(vidas_txt, "vidas: " .. vidas);
+end
 
 
 

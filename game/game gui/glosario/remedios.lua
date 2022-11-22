@@ -14,6 +14,14 @@ M.estados[2] = hash("paralizado");
 M.estados[3] = hash("quemado");
 M.estados[4] = hash("congelado");
 M.estados[5] = hash("debilitado");
+
+M.estados[1+5] = "envenenado" ;
+M.estados[2+5] = "paralizado";
+M.estados[3+5] = "quemado";
+M.estados[4+5] = "congelado";
+M.estados[5+5] = "debilitado";
+
+
 	-- ENVENENADO --
 M[1] = {}
 M[1].img = {"vacc", "pasti", "curita", "comida"}
@@ -32,7 +40,33 @@ M[2][2] = blue
 M[2][3] = red
 M[2][4] = green
 
+-- QUEMADO --
+M[3] = {}
+M[3].img = {"vacc", "curita", "comida", "pasti"}
+M[3].orden = {hash("vacuna"), hash("curita"), hash("comida"), hash("pasti")};
+M[3][1] = blue
+M[3][2] = blue
+M[3][3] = green
+M[3][4] = red
 
+-- CONGELADO --
+M[4] = {}
+M[4].img = {"comida", "pasti", "curita", "vacc"}
+M[4].orden = {hash("comida"), hash("pasti"), hash("curita"), hash("vacuna")};
+M[4][1] = red
+M[4][2] = blue
+M[4][3] = red
+M[4][4] = green
+
+
+-- DEBILITADO --
+M[5] = {}
+M[5].img = {"vacc", "comida", "pasti", "curita"}
+M[5].orden = {hash("vacuna"), hash("comida"), hash("pasti"), hash("curita")};
+M[5][1] = green
+M[5][2] = blue
+M[5][3] = red
+M[5][4] = green
 
 
 
