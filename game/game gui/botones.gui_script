@@ -19,6 +19,8 @@ local orden_incorrecto;
 local aplicar_remedio;
 local murio_bicho;
 local hay_bicho_nuevo;
+local bicho_curado;
+local restaurar_botones;
 
 -- Nodos
 local vacc_t;
@@ -94,7 +96,7 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("muere_bicho") then
 		murio_bicho(self);
 	elseif message_id == hash("bicho_nuevo") then
-		hay_bicho_nuevo();
+		hay_bicho_nuevo(self);
 		print("hay bicho nuevo");
 	end
 end
@@ -204,14 +206,14 @@ chequeo_correccion = function(self, color)
 	if self.boton_activo == remedios[estado_bicho].orden[numerador_orden] and color == remedios[estado_bicho][numerador_orden][1] then
 		print("Boton correcto")
 		msg.post("/sonidos", "sonido", {sonido = "#ok"})
-		aparecer_textos(ultimo_boton_presionado);
+		--aparecer_textos(ultimo_boton_presionado);
 		gui.set_enabled(self.boton_activo_c, false);
 		local colorcito_back = remedios[estado_bicho][numerador_orden][2];
 		colorcito_back2 = vmath.vector4(0,0,0,0.25);
 		gui.set_color(boton_back, colorcito_back-colorcito_back2)
 		sumar_numerador_orden();
 		if numerador_orden >= 5 then
-			aplicar_remedio();
+			aplicar_remedio(self);
 			return
 		end
 		restaurar_click(self)
@@ -233,11 +235,12 @@ orden_incorrecto = function(self)
 	timer.delay(1.5, false, restaurar_click)
 end
 
-aplicar_remedio = function()
+aplicar_remedio = function(self)
 	datos.print("Aplicar remedio")
 	print("Aplicar remedio")
 	msg.post("/sonidos", "sonido", {sonido = "#remedio"})
 	remedios.bicho_curado = true;
+	bicho_curado(self);
 end
 
 murio_bicho = function(self)
@@ -249,15 +252,26 @@ murio_bicho = function(self)
 	puede_clickear = false;
 end
 
-hay_bicho_nuevo = function()
+hay_bicho_nuevo = function(self)
 	puede_clickear = true;
 	msg.post("barra_de_vida", "hay_bicho_nuevo");
 	msg.post("", "acquire_input_focus");
+	restaurar_botones(self);
 end
 
+bicho_curado = function(self)
+	--msg.post("", "release_input_focus");
+	msg.post(remedios.bicho_url, "bicho_curado")
+	msg.post("barra_de_vida", "bicho_curado")
+	restaurar_orden(self);
+end
 
-
-
+restaurar_botones = function(self)
+	gui.set_enabled(self.vacc, true);
+	gui.set_enabled(self.pasti, true);
+	gui.set_enabled(self.curita, true);
+	gui.set_enabled(self.comida, true);
+end
 
 
 

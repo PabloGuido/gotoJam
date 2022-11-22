@@ -5,22 +5,43 @@ local pos_y = datos.screen_size[2]/2
 go.property("vida", 0)
 go.property("estado", 0)
 go.property("curado", false)
+
+-- Vars funciones
+local terminar_bicho;
 function init(self)
 	go.set_position(vmath.vector3(pos_x, pos_y, 0));
 	remedios.bicho = self.estado;
 	remedios.bicho_curado = self.curado;
 	remedios.hay_bicho = true;
+	remedios.bicho_url = msg.url();
 	msg.post("botones", "bicho_nuevo");
 end
 
 function final(self)
-
+	msg.post("bicho_fac", "crear_bicho_nuevo");
 end
 
 
 function on_message(self, message_id, message, sender)
+	if message_id == hash("bicho_curado") then
+		print("ASODASODIJAOSIDJOAISJDOAISJDOIASJD")
+		timer.delay(3, false, terminar_bicho)
+	end
+end
+
+terminar_bicho = function()
+	go.delete();
 
 end
+
+
+
+
+
+
+
+	
+
 
 
 

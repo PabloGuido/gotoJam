@@ -28,6 +28,10 @@ function on_message(self, message_id, message, sender)
 		bajar_vida(message.delta);
 	elseif message_id == hash("hay_bicho_nuevo") then
 		gui.set_enabled(vida, true);
+	elseif message_id == hash("bicho_curado") then
+		escala.y = 1;
+		gui.set_scale(vida, escala);
+		gui.set_enabled(vida, false);
 	end
 end
 

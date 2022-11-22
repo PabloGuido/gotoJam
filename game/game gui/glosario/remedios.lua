@@ -7,6 +7,7 @@ local M = {};
 M.bicho = nil; -- Estado del bicho?
 M.bicho_curado = false;
 M.hay_bicho = false;
+M.bicho_url = nil;
 M.estados = {};
 M.estados[1] = hash("envenenado") ;
 M.estados[2] = hash("paralizado");

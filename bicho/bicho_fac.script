@@ -13,7 +13,10 @@ function final(self)
 end
 
 function on_message(self, message_id, message, sender)
-
+	if message_id == hash("crear_bicho_nuevo") then
+		--timer.delay(1, false, crear_bicho);
+		crear_bicho();
+	end
 end
 
 function on_input(self, action_id, action)
@@ -21,7 +24,7 @@ function on_input(self, action_id, action)
 end
 
 crear_bicho = function()
-	factory.create("#bicho_fac", nil, nil, {estado = 2})
+	factory.create("#bicho_fac", nil, nil, {estado = 1});
 end
 
 
