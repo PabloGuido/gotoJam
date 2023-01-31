@@ -1,7 +1,7 @@
 local datos = require("main.datos")
 local remedios = require("game.game gui.glosario.remedios")
-local glosario_x = datos.screen_size[1]/2 - 390;
-local glosario_y = datos.screen_size[2]/2;
+local glosario_x = datos.screen_size[1]/2 - 370;
+local glosario_y = datos.screen_size[2]/2 - 15;
 
 
 -- Vars nodos

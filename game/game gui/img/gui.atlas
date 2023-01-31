@@ -14,6 +14,18 @@ images {
   image: "/game/game gui/img/botones/vacc.png"
   sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
+images {
+  image: "/game/game gui/glosario/img/boton_glosario.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/game/game gui/glosario/img/fondo_glosario.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
+images {
+  image: "/game/game gui/glosario/img/marcador_glosario.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+}
 margin: 0
 extrude_borders: 2
 inner_padding: 0
