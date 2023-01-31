@@ -1,0 +1,39 @@
+local datos = require("main.datos")
+local remedios = require("game.game gui.glosario.remedios")
+local pos_x = datos.screen_size[1]/2;
+local pos_y = datos.screen_size[2]/2 - 80;
+
+-- nodos
+local caja;
+local start;
+local game_over;
+
+local msj_factory;
+
+function init(self)
+	caja = gui.get_node("caja")
+	start = gui.get_node("start")
+	game_over = gui.get_node("game_over")
+	gui.set_position(caja, vmath.vector3(pos_x, pos_y, 0))
+	gui.set_enabled(game_over, false)
+	msg.post("", "acquire_input_focus")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("game_over") then
+		gui.set_enabled(game_over, true)
+		gui.set_enabled(caja, true)
+	end
+end
+
+function on_input(self, action_id, action)
+	if gui.is_enabled(caja) and gui.pick_node(start, action.x, action.y) and action.pressed then
+		gui.set_enabled(caja, false)
+		timer.delay(1.5, false, msj_factory)
+	end
+end
+
+msj_factory = function()
+	msg.post("bicho_fac", "crear_bicho_nuevo")
+end
+
