@@ -88,7 +88,7 @@ embedded_components {
   data: "sound: \"/sonidos/nlfc.ogg\"\n"
   "looping: 1\n"
   "group: \"master\"\n"
-  "gain: 0.0\n"
+  "gain: 0.25\n"
   "pan: 0.0\n"
   "speed: 1.0\n"
   "loopcount: 0\n"

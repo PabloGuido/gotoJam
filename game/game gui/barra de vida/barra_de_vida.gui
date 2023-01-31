@@ -31,9 +31,9 @@ nodes {
     w: 1.0
   }
   color {
-    x: 0.7019608
-    y: 0.9019608
-    z: 0.7019608
+    x: 0.101960786
+    y: 0.3019608
+    z: 0.101960786
     w: 1.0
   }
   type: TYPE_BOX
@@ -59,6 +59,8 @@ nodes {
   template_node_child: false
   size_mode: SIZE_MODE_MANUAL
   custom_type: 0
+  enabled: true
+  visible: true
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

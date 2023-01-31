@@ -10,9 +10,6 @@ function init(self)
 	--crear_bicho();
 end
 
-function final(self)
-
-end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("crear_bicho_nuevo") then
@@ -21,9 +18,6 @@ function on_message(self, message_id, message, sender)
 	end
 end
 
-function on_input(self, action_id, action)
-
-end
 
 crear_bicho = function()
 	numero_random();

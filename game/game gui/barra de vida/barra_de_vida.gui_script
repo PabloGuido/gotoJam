@@ -17,12 +17,6 @@ function init(self)
 	gui.set_enabled(vida, false);
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
-
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("bajar_vida") then
